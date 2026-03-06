@@ -79,29 +79,29 @@ class CoreButton extends StatelessWidget {
   //cores do botão
   Color _background(BuildContext context) {
     return switch (variant) {
-      CoreButtonVariant.primary => const Color(0xFF18181B),
-      CoreButtonVariant.secondary => const Color(0xFFF4F4F5),
+      CoreButtonVariant.primary => Theme.of(context).colorScheme.primary,
+      CoreButtonVariant.secondary => Theme.of(context).colorScheme.secondary,
       CoreButtonVariant.outline => Colors.transparent,
       CoreButtonVariant.ghost => Colors.transparent,
-      CoreButtonVariant.destructive => const Color(0xFFEF4444),
+      CoreButtonVariant.destructive => Theme.of(context).colorScheme.error,
       CoreButtonVariant.link => Colors.transparent,
     };
   }
 
   Color _foreground(BuildContext context) {
     return switch (variant) {
-      CoreButtonVariant.primary => Colors.white,
-      CoreButtonVariant.secondary => const Color(0xFF18181B),
-      CoreButtonVariant.outline => const Color(0xFF18181B),
-      CoreButtonVariant.ghost => const Color(0xFF18181B),
-      CoreButtonVariant.destructive => Colors.white,
-      CoreButtonVariant.link => const Color(0xFF18181B),
+      CoreButtonVariant.primary => Theme.of(context).colorScheme.onPrimary,
+      CoreButtonVariant.secondary => Theme.of(context).colorScheme.onSecondary,
+      CoreButtonVariant.outline => Theme.of(context).colorScheme.onSurface,
+      CoreButtonVariant.ghost => Theme.of(context).colorScheme.onSurface,
+      CoreButtonVariant.destructive => Theme.of(context).colorScheme.onError,
+      CoreButtonVariant.link => Theme.of(context).colorScheme.primary,
     };
   }
 
   Color? _borderColor(BuildContext context) {
     return switch (variant) {
-      CoreButtonVariant.outline => const Color(0xFFE4E4E7),
+      CoreButtonVariant.outline => Theme.of(context).dividerColor,
       _ => null,
     };
   }
@@ -109,11 +109,11 @@ class CoreButton extends StatelessWidget {
   //cores hover
   Color _hoverColor(BuildContext context) {
     return switch (variant) {
-      CoreButtonVariant.primary => const Color(0xFF27272A),
-      CoreButtonVariant.secondary => const Color(0xFFE4E4E7),
-      CoreButtonVariant.outline => const Color(0xFFF4F4F5),
-      CoreButtonVariant.ghost => const Color(0xFFF4F4F5),
-      CoreButtonVariant.destructive => const Color(0xFFDC2626),
+      CoreButtonVariant.primary => Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+      CoreButtonVariant.secondary => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.1),
+      CoreButtonVariant.outline => Theme.of(context).colorScheme.secondary,
+      CoreButtonVariant.ghost => Theme.of(context).colorScheme.secondary,
+      CoreButtonVariant.destructive => Theme.of(context).colorScheme.error.withValues(alpha: 0.8),
       CoreButtonVariant.link => Colors.transparent,
     };
   }

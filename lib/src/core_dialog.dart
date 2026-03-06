@@ -64,9 +64,9 @@ class MainDialog extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
-        side: const BorderSide(color: Color(0xFFE4E4E7), width: 1),
+        side: BorderSide(color: Theme.of(context).dividerColor, width: 1),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       surfaceTintColor: Colors.transparent,
       elevation: 2,
       insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -78,15 +78,15 @@ class MainDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 24, color: const Color(0xFF18181B)),
+              Icon(icon, size: 24, color: Theme.of(context).colorScheme.onSurface),
               const SizedBox(height: 16),
             ],
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Color(0xFF18181B),
+                color: Theme.of(context).colorScheme.onSurface,
                 height: 1.2,
               ),
             ),
@@ -94,10 +94,10 @@ class MainDialog extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 description!,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xFF71717A),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                   height: 1.5,
                 ),
               ),

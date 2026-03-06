@@ -50,15 +50,15 @@ class _CoreCardState extends State<CoreCard> {
 
   @override
   Widget build(BuildContext context) {
-    const borderColor = Color(0xFFE4E4E7);
-    const backgroundColor = Colors.white;
+    final borderColor = Theme.of(context).dividerColor;
+    final backgroundColor = Theme.of(context).colorScheme.surface;
 
     final isElevated = widget.variant == CoreCardVariant.elevated;
 
     final Color overlayColor = _isPressed
-        ? const Color(0xFFF4F4F5).withValues(alpha: 0.8)
+        ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.08)
         : _isHovering
-        ? const Color(0xFFF4F4F5).withValues(alpha: 0.5)
+        ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.04)
         : Colors.transparent;
 
     final double scale = _isPressed ? 0.98 : 1.0;
@@ -85,14 +85,14 @@ class _CoreCardState extends State<CoreCard> {
           boxShadow: isElevated
               ? [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
+                    color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.05),
                     blurRadius: 10,
                     offset: const Offset(0, 2),
                   ),
                 ]
               : [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.02),
+                    color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.02),
                     blurRadius: 2,
                     offset: const Offset(0, 1),
                   ),

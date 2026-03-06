@@ -18,11 +18,11 @@ class CoreSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDisabled = disabled || onChanged == null;
-    const activeColor = Color(0xFF18181B);
-    const inactiveColor = Color(0xFFE4E4E7);
-    const thumbColor = Colors.white;
-    const textColor = Color(0xFF18181B);
-    const descriptionColor = Color(0xFF71717A);
+    final activeColor = Theme.of(context).colorScheme.primary;
+    final inactiveColor = Theme.of(context).dividerColor;
+    final thumbColor = Theme.of(context).colorScheme.surface;
+    final textColor = Theme.of(context).colorScheme.onSurface;
+    final descriptionColor = Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
 
     Widget customSwitch = GestureDetector(
       onTap: isDisabled ? null : () => onChanged?.call(!value),
@@ -43,14 +43,14 @@ class CoreSwitch extends StatelessWidget {
           child: Container(
             width: 20,
             height: 20,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: thumbColor,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black12,
+                  color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.12),
                   blurRadius: 2,
-                  offset: Offset(0, 1),
+                  offset: const Offset(0, 1),
                 ),
               ],
             ),
@@ -81,7 +81,7 @@ class CoreSwitch extends StatelessWidget {
                     onTap: isDisabled ? null : () => onChanged?.call(!value),
                     child: Text(
                       label!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: textColor,
@@ -93,7 +93,7 @@ class CoreSwitch extends StatelessWidget {
                   if (label != null) const SizedBox(height: 4),
                   Text(
                     description!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: descriptionColor,

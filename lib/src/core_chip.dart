@@ -16,11 +16,11 @@ class CoreChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDisabled = disabled;
-    const activeBgColor = Color(0xFF18181B);
-    const activeTextColor = Colors.white;
+    final activeBgColor = Theme.of(context).colorScheme.primary;
+    final activeTextColor = Theme.of(context).colorScheme.onPrimary;
     const inactiveBgColor = Colors.transparent;
-    const inactiveTextColor = Color(0xFF18181B);
-    const inactiveBorderColor = Color(0xFFE4E4E7);
+    final inactiveTextColor = Theme.of(context).colorScheme.onSurface;
+    final inactiveBorderColor = Theme.of(context).dividerColor;
 
     Widget chip = GestureDetector(
       onTap: isDisabled

@@ -18,16 +18,16 @@ class CoreCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDisabled = disabled || onChanged == null;
-    const primaryColor = Color(0xFF18181B);
-    const textColor = Color(0xFF18181B);
-    const descriptionColor = Color(0xFF71717A);
+    final primaryColor = Theme.of(context).colorScheme.primary;
+    final textColor = Theme.of(context).colorScheme.onSurface;
+    final descriptionColor = Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
 
     Widget checkbox = Checkbox(
       value: value,
       onChanged: isDisabled ? null : onChanged,
       activeColor: primaryColor,
-      checkColor: Colors.white,
-      side: const BorderSide(color: primaryColor, width: 1.5),
+      checkColor: Theme.of(context).colorScheme.onPrimary,
+      side: BorderSide(color: primaryColor, width: 1.5),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
@@ -55,7 +55,7 @@ class CoreCheckBox extends StatelessWidget {
                     onTap: isDisabled ? null : () => onChanged?.call(!value),
                     child: Text(
                       label!,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: textColor,
@@ -67,7 +67,7 @@ class CoreCheckBox extends StatelessWidget {
                   if (label != null) const SizedBox(height: 4),
                   Text(
                     description!,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                       color: descriptionColor,

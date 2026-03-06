@@ -26,13 +26,13 @@ class CoreSelect<T> extends StatelessWidget {
   final bool disabled;
   final IconData? prefixIcon;
   final String? Function(T?)? validator;
-  static const _border = Color(0xFFE4E4E7);
-  static const _focusBorder = Color(0xFF18181B);
-  static const _errorBorder = Color(0xFFEF4444);
-  static const _fillColor = Color(0xFFF4F4F5);
-  static const _textColor = Color(0xFF18181B);
-  static const _hintColor = Color(0xFFA1A1AA);
-  static const _labelColor = Color(0xFF71717A);
+  Color _borderColor(BuildContext context) => Theme.of(context).dividerColor;
+  Color _focusBorderColor(BuildContext context) => Theme.of(context).colorScheme.primary;
+  Color _errorBorderColor(BuildContext context) => Theme.of(context).colorScheme.error;
+  Color _fillColorVal(BuildContext context) => Theme.of(context).colorScheme.secondary;
+  Color _textColorVal(BuildContext context) => Theme.of(context).colorScheme.onSurface;
+  Color _hintColorVal(BuildContext context) => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
+  Color _labelColorVal(BuildContext context) => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
 
   double get _fontSize {
     return switch (size) {
@@ -69,66 +69,66 @@ class CoreSelect<T> extends StatelessWidget {
 
   double get _borderRadius => 8;
 
-  InputBorder _enabledBorder() {
+  InputBorder _enabledBorder(BuildContext context) {
     return switch (variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _border, width: 1),
+        borderSide: BorderSide(color: _borderColor(context), width: 1),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
         borderSide: BorderSide.none,
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
-        borderSide: BorderSide(color: _border, width: 1),
+      CoreInputVariant.underline => UnderlineInputBorder(
+        borderSide: BorderSide(color: _borderColor(context), width: 1),
       ),
     };
   }
 
-  InputBorder _focusedBorder() {
+  InputBorder _focusedBorder(BuildContext context) {
     return switch (variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _focusBorder, width: 1.5),
+        borderSide: BorderSide(color: _focusBorderColor(context), width: 1.5),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _focusBorder, width: 1.5),
+        borderSide: BorderSide(color: _focusBorderColor(context), width: 1.5),
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
-        borderSide: BorderSide(color: _focusBorder, width: 1.5),
+      CoreInputVariant.underline => UnderlineInputBorder(
+        borderSide: BorderSide(color: _focusBorderColor(context), width: 1.5),
       ),
     };
   }
 
-  InputBorder _errorBorderStyle() {
+  InputBorder _errorBorderStyle(BuildContext context) {
     return switch (variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1),
+        borderSide: BorderSide(color: _errorBorderColor(context), width: 1),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1),
+        borderSide: BorderSide(color: _errorBorderColor(context), width: 1),
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
-        borderSide: BorderSide(color: _errorBorder, width: 1),
+      CoreInputVariant.underline => UnderlineInputBorder(
+        borderSide: BorderSide(color: _errorBorderColor(context), width: 1),
       ),
     };
   }
 
-  InputBorder _focusedErrorBorder() {
+  InputBorder _focusedErrorBorder(BuildContext context) {
     return switch (variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1.5),
+        borderSide: BorderSide(color: _errorBorderColor(context), width: 1.5),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1.5),
+        borderSide: BorderSide(color: _errorBorderColor(context), width: 1.5),
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
-        borderSide: BorderSide(color: _errorBorder, width: 1.5),
+      CoreInputVariant.underline => UnderlineInputBorder(
+        borderSide: BorderSide(color: _errorBorderColor(context), width: 1.5),
       ),
     };
   }
@@ -141,7 +141,7 @@ class CoreSelect<T> extends StatelessWidget {
     final textStyle = TextStyle(
       fontSize: _fontSize,
       fontWeight: FontWeight.w400,
-      color: _textColor,
+      color: _textColorVal(context),
       height: 1.4,
     );
 
@@ -149,10 +149,10 @@ class CoreSelect<T> extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null) ...[
-          Text(label!, style: const TextStyle(
+          Text(label!, style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: _labelColor,
+            color: _labelColorVal(context),
           )),
           const SizedBox(height: 10),
         ],
@@ -162,31 +162,31 @@ class CoreSelect<T> extends StatelessWidget {
           onChanged: effectiveDisabled ? null : onChanged,
           validator: validator,
           style: textStyle,
-          icon: Icon(Icons.unfold_more, size: _iconSize, color: _hintColor),
-          dropdownColor: Colors.white,
+          icon: Icon(Icons.unfold_more, size: _iconSize, color: _hintColorVal(context)),
+          dropdownColor: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(_borderRadius),
           decoration: InputDecoration(
             hintText: hint,
             isDense: true,
             filled: isFilled,
-            fillColor: isFilled ? _fillColor : null,
+            fillColor: isFilled ? _fillColorVal(context) : null,
             contentPadding: _contentPadding,
             hintStyle: TextStyle(
               fontSize: _fontSize,
               fontWeight: FontWeight.w400,
-              color: _hintColor,
+              color: _hintColorVal(context),
             ),
             errorStyle: TextStyle(
               fontSize: _fontSize - 2,
-              color: _errorBorder,
+              color: _errorBorderColor(context),
             ),
-            enabledBorder: _enabledBorder(),
-            focusedBorder: _focusedBorder(),
-            errorBorder: _errorBorderStyle(),
-            focusedErrorBorder: _focusedErrorBorder(),
-            disabledBorder: _enabledBorder(),
+            enabledBorder: _enabledBorder(context),
+            focusedBorder: _focusedBorder(context),
+            errorBorder: _errorBorderStyle(context),
+            focusedErrorBorder: _focusedErrorBorder(context),
+            disabledBorder: _enabledBorder(context),
             prefixIcon: prefixIcon != null
-                ? Icon(prefixIcon, size: _iconSize, color: _hintColor)
+                ? Icon(prefixIcon, size: _iconSize, color: _hintColorVal(context))
                 : null,
           ),
         ),

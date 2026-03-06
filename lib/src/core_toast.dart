@@ -24,34 +24,34 @@ class CoreToast {
 
     switch (variant) {
       case CoreToastVariant.destructive:
-        backgroundColor = const Color(0xFFEF4444);
-        textColor = Colors.white;
-        descriptionColor = Colors.white.withValues(alpha: 0.9);
-        borderColor = const Color(0xFFEF4444);
-        iconColor = Colors.white;
-        actionTextColor = Colors.white;
-        actionBackgroundColor = Colors.transparent;
-        actionBorderColor = Colors.white.withValues(alpha: 0.2);
+        backgroundColor = Theme.of(context).colorScheme.error;
+        textColor = Theme.of(context).colorScheme.onError;
+        descriptionColor = Theme.of(context).colorScheme.onError.withValues(alpha: 0.9);
+        borderColor = Theme.of(context).colorScheme.error;
+        iconColor = Theme.of(context).colorScheme.onError;
+        actionTextColor = Theme.of(context).colorScheme.onError;
+        actionBackgroundColor = Theme.of(context).colorScheme.surface.withValues(alpha: 0.0);
+        actionBorderColor = Theme.of(context).colorScheme.onError.withValues(alpha: 0.2);
         break;
       case CoreToastVariant.success:
-        backgroundColor = const Color(0xFF22C55E);
-        textColor = Colors.white;
-        descriptionColor = Colors.white.withValues(alpha: 0.9);
-        borderColor = const Color(0xFF22C55E);
-        iconColor = Colors.white;
-        actionTextColor = Colors.white;
-        actionBackgroundColor = Colors.transparent;
-        actionBorderColor = Colors.white.withValues(alpha: 0.2);
+        backgroundColor = Colors.green;
+        textColor = Theme.of(context).colorScheme.onPrimary;
+        descriptionColor = Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.9);
+        borderColor = Colors.green;
+        iconColor = Theme.of(context).colorScheme.onPrimary;
+        actionTextColor = Theme.of(context).colorScheme.onPrimary;
+        actionBackgroundColor = Theme.of(context).colorScheme.surface.withValues(alpha: 0.0);
+        actionBorderColor = Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.2);
         break;
       case CoreToastVariant.defaultToast:
-        backgroundColor = Colors.white;
-        textColor = const Color(0xFF18181B);
-        descriptionColor = const Color(0xFF71717A);
-        borderColor = const Color(0xFFE4E4E7);
-        iconColor = const Color(0xFF18181B);
-        actionTextColor = const Color(0xFF18181B);
-        actionBackgroundColor = Colors.transparent;
-        actionBorderColor = const Color(0xFFE4E4E7);
+        backgroundColor = Theme.of(context).colorScheme.surface;
+        textColor = Theme.of(context).colorScheme.onSurface;
+        descriptionColor = Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+        borderColor = Theme.of(context).dividerColor;
+        iconColor = Theme.of(context).colorScheme.onSurface;
+        actionTextColor = Theme.of(context).colorScheme.onSurface;
+        actionBackgroundColor = Theme.of(context).colorScheme.surface.withValues(alpha: 0.0);
+        actionBorderColor = Theme.of(context).dividerColor;
         break;
     }
 

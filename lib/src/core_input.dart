@@ -60,14 +60,14 @@ class _CoreInputState extends State<CoreInput> {
   bool _ownsController = false;
   String _currentValue = '';
 
-  static const _border = Color(0xFFE4E4E7);
-  static const _focusBorder = Color(0xFF18181B);
-  static const _errorBorder = Color(0xFFEF4444);
-  static const _fillColor = Color(0xFFF4F4F5);
-  static const _textColor = Color(0xFF18181B);
-  static const _hintColor = Color(0xFFA1A1AA);
-  static const _labelColor = Color(0xFF71717A);
-  static const _successColor = Color(0xFF22C55E);
+  Color get _border => Theme.of(context).dividerColor;
+  Color get _focusBorder => Theme.of(context).colorScheme.primary;
+  Color get _errorBorder => Theme.of(context).colorScheme.error;
+  Color get _fillColor => Theme.of(context).colorScheme.secondary;
+  Color get _textColor => Theme.of(context).colorScheme.onSurface;
+  Color get _hintColor => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
+  Color get _labelColor => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+  Color get _successColor => Colors.green;
 
   @override
   void initState() {
@@ -166,13 +166,13 @@ class _CoreInputState extends State<CoreInput> {
     return switch (widget.variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _border, width: 1),
+        borderSide: BorderSide(color: _border, width: 1),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
         borderSide: BorderSide.none,
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
+      CoreInputVariant.underline => UnderlineInputBorder(
         borderSide: BorderSide(color: _border, width: 1),
       ),
     };
@@ -182,13 +182,13 @@ class _CoreInputState extends State<CoreInput> {
     return switch (widget.variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _focusBorder, width: 1.5),
+        borderSide: BorderSide(color: _focusBorder, width: 1.5),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _focusBorder, width: 1.5),
+        borderSide: BorderSide(color: _focusBorder, width: 1.5),
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
+      CoreInputVariant.underline => UnderlineInputBorder(
         borderSide: BorderSide(color: _focusBorder, width: 1.5),
       ),
     };
@@ -198,13 +198,13 @@ class _CoreInputState extends State<CoreInput> {
     return switch (widget.variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1),
+        borderSide: BorderSide(color: _errorBorder, width: 1),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1),
+        borderSide: BorderSide(color: _errorBorder, width: 1),
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
+      CoreInputVariant.underline => UnderlineInputBorder(
         borderSide: BorderSide(color: _errorBorder, width: 1),
       ),
     };
@@ -214,13 +214,13 @@ class _CoreInputState extends State<CoreInput> {
     return switch (widget.variant) {
       CoreInputVariant.outlined => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1.5),
+        borderSide: BorderSide(color: _errorBorder, width: 1.5),
       ),
       CoreInputVariant.filled => OutlineInputBorder(
         borderRadius: BorderRadius.circular(_borderRadius),
-        borderSide: const BorderSide(color: _errorBorder, width: 1.5),
+        borderSide: BorderSide(color: _errorBorder, width: 1.5),
       ),
-      CoreInputVariant.underline => const UnderlineInputBorder(
+      CoreInputVariant.underline => UnderlineInputBorder(
         borderSide: BorderSide(color: _errorBorder, width: 1.5),
       ),
     };
@@ -242,7 +242,7 @@ class _CoreInputState extends State<CoreInput> {
       children: [
         Text(
           widget.label ?? '',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
             color: _labelColor,
