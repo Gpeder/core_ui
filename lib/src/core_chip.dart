@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 enum CoreChipSize { sm, md, lg }
 
+enum CoreChipVariant { outlined, filled }
+
 class CoreChip extends StatelessWidget {
   const CoreChip({
     super.key,
@@ -10,12 +12,16 @@ class CoreChip extends StatelessWidget {
     this.onSelected,
     this.disabled = false,
     this.size = CoreChipSize.md,
+    this.variant = CoreChipVariant.outlined,
+    this.fillColor,
   });
   final String label;
   final bool selected;
   final ValueChanged<bool>? onSelected;
   final bool disabled;
   final CoreChipSize size;
+  final CoreChipVariant variant;
+  final Color? fillColor;
 
   EdgeInsets get _padding => switch (size) {
     CoreChipSize.sm => const .symmetric(horizontal: 8, vertical: 3),
@@ -38,11 +44,13 @@ class CoreChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDisabled = disabled;
+    final isFilled = variant == CoreChipVariant.filled;
     final activeBgColor = Theme.of(context).colorScheme.primary;
     final activeTextColor = Theme.of(context).colorScheme.onPrimary;
-    const inactiveBgColor = Colors.transparent;
+    final defaultFillColor = fillColor ?? Colors.grey.shade200;
+    final inactiveBgColor = isFilled ? defaultFillColor : Colors.transparent;
     final inactiveTextColor = Theme.of(context).colorScheme.onSurface;
-    final inactiveBorderColor = Theme.of(context).dividerColor;
+    final inactiveBorderColor = isFilled ? Colors.transparent : Theme.of(context).dividerColor;
 
     Widget chip = GestureDetector(
       onTap: isDisabled
