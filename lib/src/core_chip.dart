@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+enum CoreChipSize { sm, md, lg }
+
 class CoreChip extends StatelessWidget {
   const CoreChip({
     super.key,
@@ -7,11 +9,31 @@ class CoreChip extends StatelessWidget {
     this.selected = false,
     this.onSelected,
     this.disabled = false,
+    this.size = CoreChipSize.md,
   });
   final String label;
   final bool selected;
   final ValueChanged<bool>? onSelected;
   final bool disabled;
+  final CoreChipSize size;
+
+  EdgeInsets get _padding => switch (size) {
+    CoreChipSize.sm => const .symmetric(horizontal: 8, vertical: 3),
+    CoreChipSize.md => const .symmetric(horizontal: 12, vertical: 5),
+    CoreChipSize.lg => const .symmetric(horizontal: 16, vertical: 7),
+  };
+
+  double get _fontSize => switch (size) {
+    CoreChipSize.sm => 11,
+    CoreChipSize.md => 13,
+    CoreChipSize.lg => 15,
+  };
+
+  double get _borderRadius => switch (size) {
+    CoreChipSize.sm => 12,
+    CoreChipSize.md => 16,
+    CoreChipSize.lg => 20,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +54,10 @@ class CoreChip extends StatelessWidget {
             },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: _padding,
         decoration: BoxDecoration(
           color: selected ? activeBgColor : inactiveBgColor,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(_borderRadius),
           border: Border.all(
             color: selected ? activeBgColor : inactiveBorderColor,
             width: 1,
@@ -44,7 +66,7 @@ class CoreChip extends StatelessWidget {
         child: Text(
           label,
           style: TextStyle(
-            fontSize: 13,
+            fontSize: _fontSize,
             fontWeight: FontWeight.w500,
             color: selected ? activeTextColor : inactiveTextColor,
             height: 1.2,
