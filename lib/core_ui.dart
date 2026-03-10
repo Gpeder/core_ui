@@ -13,3 +13,5 @@ export 'src/core_avatar.dart';
 export 'src/core_calendar.dart';
 export 'src/core_datapicker.dart';
 export 'src/core_divider.dart';
+export 'src/core_iconbutton.dart';
+export 'src/core_slider.dart';
