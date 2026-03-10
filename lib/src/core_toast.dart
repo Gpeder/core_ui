@@ -35,13 +35,13 @@ class CoreToast {
         break;
       case CoreToastVariant.success:
         backgroundColor = Colors.green;
-        textColor = Theme.of(context).colorScheme.onPrimary;
-        descriptionColor = Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.9);
+        textColor = Colors.white;
+        descriptionColor = Colors.white.withValues(alpha: 0.9);
         borderColor = Colors.green;
-        iconColor = Theme.of(context).colorScheme.onPrimary;
-        actionTextColor = Theme.of(context).colorScheme.onPrimary;
-        actionBackgroundColor = Theme.of(context).colorScheme.surface.withValues(alpha: 0.0);
-        actionBorderColor = Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.2);
+        iconColor = Colors.white;
+        actionTextColor = Colors.white;
+        actionBackgroundColor = Colors.transparent;
+        actionBorderColor = Colors.green.withValues(alpha: 0.2);
         break;
       case CoreToastVariant.defaultToast:
         backgroundColor = Theme.of(context).colorScheme.surface;

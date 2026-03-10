@@ -61,6 +61,7 @@ class CoreChip extends StatelessWidget {
               }
             },
       child: AnimatedContainer(
+        alignment: Alignment.center,
         duration: const Duration(milliseconds: 200),
         padding: _padding,
         decoration: BoxDecoration(
@@ -73,6 +74,7 @@ class CoreChip extends StatelessWidget {
         ),
         child: Text(
           label,
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: _fontSize,
             fontWeight: FontWeight.w500,
