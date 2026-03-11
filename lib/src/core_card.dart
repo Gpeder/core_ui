@@ -9,12 +9,14 @@ class CoreCard extends StatefulWidget {
     this.variant = CoreCardVariant.outline,
     this.onTap,
     this.padding = const EdgeInsets.all(24),
+    this.backgroundColor,
   });
 
   final Widget child;
   final CoreCardVariant variant;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
+  final Color? backgroundColor;
 
   @override
   State<CoreCard> createState() => _CoreCardState();
@@ -51,7 +53,7 @@ class _CoreCardState extends State<CoreCard> {
   @override
   Widget build(BuildContext context) {
     final borderColor = Theme.of(context).dividerColor;
-    final backgroundColor = Theme.of(context).colorScheme.surface;
+    final backgroundColor = widget.backgroundColor ?? Theme.of(context).colorScheme.surface;
 
     final isElevated = widget.variant == CoreCardVariant.elevated;
 

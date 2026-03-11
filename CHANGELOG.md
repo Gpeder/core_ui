@@ -1,3 +1,6 @@
+## 0.0.5
+* Adicionado cor de fundo no card
+
 ## 0.0.4
 * Adicionado iconbutton e slider
 
