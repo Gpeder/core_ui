@@ -1,3 +1,6 @@
+## 0.0.6
+* Adicionado cores customizadas no input e select
+
 ## 0.0.5
 * Adicionado cor de fundo no card
 

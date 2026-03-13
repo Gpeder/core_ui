@@ -4,6 +4,8 @@ enum CoreInputVariant { outlined, filled, underline }
 
 enum CoreInputSize { sm, md, lg }
 
+enum CoreInputRadius { sm, md, lg }
+
 class PasswordRule {
   final String label;
   final bool Function(String value) check;
@@ -31,6 +33,13 @@ class CoreInput extends StatefulWidget {
     this.maxLines = 1,
     this.autofocus = false,
     this.passwordRules,
+    this.radius = CoreInputRadius.md,
+    this.fillColor,
+    this.iconColor,
+    this.labelColor,
+    this.hintColor,
+    this.textColor,
+    this.focusColor,
   });
 
   final TextEditingController? controller;
@@ -38,6 +47,7 @@ class CoreInput extends StatefulWidget {
   final String? hint;
   final CoreInputVariant variant;
   final CoreInputSize size;
+  final CoreInputRadius radius;
   final bool disabled;
   final bool readOnly;
   final bool obscureText;
@@ -50,6 +60,12 @@ class CoreInput extends StatefulWidget {
   final int maxLines;
   final bool autofocus;
   final List<PasswordRule>? passwordRules;
+  final Color? fillColor;
+  final Color? iconColor;
+  final Color? labelColor;
+  final Color? hintColor;
+  final Color? textColor;
+  final Color? focusColor;
 
   @override
   State<CoreInput> createState() => _CoreInputState();
@@ -61,12 +77,13 @@ class _CoreInputState extends State<CoreInput> {
   String _currentValue = '';
 
   Color get _border => Theme.of(context).dividerColor;
-  Color get _focusBorder => Theme.of(context).colorScheme.primary;
+  Color get _focusBorder => widget.focusColor ?? Theme.of(context).colorScheme.primary;
   Color get _errorBorder => Theme.of(context).colorScheme.error;
-  Color get _fillColor => Theme.of(context).colorScheme.secondary;
-  Color get _textColor => Theme.of(context).colorScheme.onSurface;
-  Color get _hintColor => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
-  Color get _labelColor => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+  Color get _fillColor => widget.fillColor ?? Theme.of(context).colorScheme.secondary;
+  Color get _textColor => widget.textColor ?? Theme.of(context).colorScheme.onSurface;
+  Color get _hintColor => widget.hintColor ?? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
+  Color get _labelColor => widget.labelColor ?? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+  Color get _iconColor => widget.iconColor ?? _hintColor;
   Color get _successColor => Colors.green;
 
   @override
@@ -159,7 +176,13 @@ class _CoreInputState extends State<CoreInput> {
     };
   }
 
-  double get _borderRadius => 8;
+  double get _borderRadius {
+    return switch (widget.radius) {
+      CoreInputRadius.sm => 8,
+      CoreInputRadius.md => 12,
+      CoreInputRadius.lg => 24,
+    };
+  }
 
   // bordas por variante
   InputBorder _enabledBorder() {
@@ -279,7 +302,7 @@ class _CoreInputState extends State<CoreInput> {
             focusedErrorBorder: _focusedErrorBorder(),
             disabledBorder: _enabledBorder(),
             prefixIcon: widget.prefixIcon != null
-                ? Icon(widget.prefixIcon, size: _iconSize, color: _hintColor)
+                ? Icon(widget.prefixIcon, size: _iconSize, color: _iconColor)
                 : null,
             suffixIcon: widget.suffixIcon != null
                 ? GestureDetector(
@@ -287,7 +310,7 @@ class _CoreInputState extends State<CoreInput> {
                     child: Icon(
                       widget.suffixIcon,
                       size: _iconSize,
-                      color: _hintColor,
+                      color: _iconColor,
                     ),
                   )
                 : null,

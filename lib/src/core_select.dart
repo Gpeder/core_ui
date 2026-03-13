@@ -11,9 +11,16 @@ class CoreSelect<T> extends StatelessWidget {
     this.hint,
     this.variant = CoreInputVariant.outlined,
     this.size = CoreInputSize.md,
+    this.radius = CoreInputRadius.md,
     this.disabled = false,
     this.prefixIcon,
     this.validator,
+    this.fillColor,
+    this.iconColor,
+    this.labelColor,
+    this.hintColor,
+    this.textColor,
+    this.focusColor,
   });
 
   final List<DropdownMenuItem<T>> items;
@@ -23,16 +30,25 @@ class CoreSelect<T> extends StatelessWidget {
   final String? hint;
   final CoreInputVariant variant;
   final CoreInputSize size;
+  final CoreInputRadius radius;
   final bool disabled;
   final IconData? prefixIcon;
   final String? Function(T?)? validator;
+  final Color? fillColor;
+  final Color? iconColor;
+  final Color? labelColor;
+  final Color? hintColor;
+  final Color? textColor;
+  final Color? focusColor;
+
   Color _borderColor(BuildContext context) => Theme.of(context).dividerColor;
-  Color _focusBorderColor(BuildContext context) => Theme.of(context).colorScheme.primary;
+  Color _focusBorderColor(BuildContext context) => focusColor ?? Theme.of(context).colorScheme.primary;
   Color _errorBorderColor(BuildContext context) => Theme.of(context).colorScheme.error;
-  Color _fillColorVal(BuildContext context) => Theme.of(context).colorScheme.secondary;
-  Color _textColorVal(BuildContext context) => Theme.of(context).colorScheme.onSurface;
-  Color _hintColorVal(BuildContext context) => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
-  Color _labelColorVal(BuildContext context) => Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+  Color _fillColorVal(BuildContext context) => fillColor ?? Theme.of(context).colorScheme.secondary;
+  Color _textColorVal(BuildContext context) => textColor ?? Theme.of(context).colorScheme.onSurface;
+  Color _hintColorVal(BuildContext context) => hintColor ?? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
+  Color _labelColorVal(BuildContext context) => labelColor ?? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6);
+  Color _iconColorVal(BuildContext context) => iconColor ?? _hintColorVal(context);
 
   double get _fontSize {
     return switch (size) {
@@ -67,7 +83,13 @@ class CoreSelect<T> extends StatelessWidget {
     };
   }
 
-  double get _borderRadius => 8;
+  double get _borderRadius {
+    return switch (radius) {
+      CoreInputRadius.sm => 8,
+      CoreInputRadius.md => 12,
+      CoreInputRadius.lg => 24,
+    };
+  }
 
   InputBorder _enabledBorder(BuildContext context) {
     return switch (variant) {
@@ -162,7 +184,7 @@ class CoreSelect<T> extends StatelessWidget {
           onChanged: effectiveDisabled ? null : onChanged,
           validator: validator,
           style: textStyle,
-          icon: Icon(Icons.unfold_more, size: _iconSize, color: _hintColorVal(context)),
+          icon: Icon(Icons.unfold_more, size: _iconSize, color: _iconColorVal(context)),
           dropdownColor: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(_borderRadius),
           decoration: InputDecoration(
@@ -186,7 +208,7 @@ class CoreSelect<T> extends StatelessWidget {
             focusedErrorBorder: _focusedErrorBorder(context),
             disabledBorder: _enabledBorder(context),
             prefixIcon: prefixIcon != null
-                ? Icon(prefixIcon, size: _iconSize, color: _hintColorVal(context))
+                ? Icon(prefixIcon, size: _iconSize, color: _iconColorVal(context))
                 : null,
           ),
         ),
