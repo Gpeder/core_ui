@@ -1,3 +1,6 @@
+## 0.0.8
+* Adicionado textarea
+
 ## 0.0.7
 * Adicionado gradient no card
 
