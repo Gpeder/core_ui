@@ -13,6 +13,7 @@ class CoreCard extends StatefulWidget {
     this.onTap,
     this.padding = const EdgeInsets.all(24),
     this.backgroundColor,
+    this.gradient,
   });
 
   final Widget child;
@@ -21,6 +22,7 @@ class CoreCard extends StatefulWidget {
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
   final Color? backgroundColor;
+  final Gradient? gradient;
 
   @override
   State<CoreCard> createState() => _CoreCardState();
@@ -92,6 +94,7 @@ class _CoreCardState extends State<CoreCard> {
       child: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
+          gradient: widget.gradient,
           borderRadius: BorderRadius.circular(borderRadiusValue),
           border: isElevated ? null : Border.all(color: borderColor, width: 1),
           boxShadow: isElevated
