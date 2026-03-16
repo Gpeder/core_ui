@@ -15,3 +15,4 @@ export 'src/core_datapicker.dart';
 export 'src/core_divider.dart';
 export 'src/core_iconbutton.dart';
 export 'src/core_slider.dart';
+export 'src/core_textarea.dart';
