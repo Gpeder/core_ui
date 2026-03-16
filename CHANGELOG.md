@@ -1,3 +1,6 @@
+## 0.0.7
+* Adicionado gradient no card
+
 ## 0.0.6
 * Adicionado cores customizadas no input e select
 
